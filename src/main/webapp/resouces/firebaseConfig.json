@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "fruitshop-1e407",
+  "private_key_id": "36134fc64828cee359efb273460d48993b90d453",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCtM0LiUHBPdNJz\njRJqr8ZC4Rl4OQZrkWB2I6X25v85si1Hxw9z4D5SlflFdsbdHH2bMQEFr9ag7teK\nha1tFBAfgZmRLJ4Hk/GBHrIITgsVjRcx5yc6iIC6FfszT5tbzN1wjy50O0YYwH/j\neqcwt162CEHDGKf51we6/a8FFZqbFsHDgU8JAkQ6twdnqiqrZ0jE9+b8e+O0xWKN\nXKhgwrO58CWFpxFz+ADSe/fqf6r+zvctXljmbM/voP3uzgJFbWqc+yOc1zTw1TYs\nF2CuGvR5jmIUGSnCgWYfZCicJ+ErxAyDUgcmztmTbY71XjzkM9EtJjBuRUAA/r20\nAVs3XEFxAgMBAAECggEABSr4rvbvt5018NLydrAL4j+5bPNa+CTFsYIMNWG3LJNp\njgutWpD5XGk4v3b6cCCbH6vusAA1xHDv9I8FyacIjp9v3mDWjnBpK109OmnKuJ/w\nY4cA7i+3veWtQb65X9viYRWym676Pyo86U6QnxpfkfP33gXWBZVCDVUnrrGySTg6\nsehCM+DvMHrS9w63nHzCLwfrlMi2zvq+SvldZtCtY2zh6REmYBVoh6gf7JGIekgG\n2muBhL5k32iGSTQD1j8XhxVK5/A1Nf23e/qIjhEmQTT0yjH1obDaGZKr9N87yvSY\nJyb5t9rrtzgW/UPMPxMROIA/qg3cxkefigXDVBBYqQKBgQDnhOGwbaSNR0mCTDQ1\nDF3OGA+NXZhyU3oydfJV/G/QSaByVkSUIoa6sLwhpbTxSA0pLydIb5OwZeQ1Kh09\nd3nhNHWgS8bg/NRxkoiOKDIrugfzzJM6fw87RbVHGwuScnSurVhI+brBliF3PNJi\nGuoU6CR+rmt0SZxIWhGJPmLf6QKBgQC/g7cAOYV+QPzzXr0KeFSQbfTSTFAeNPo5\ne8TNAOZAPS47/NO5AylU9d3v3sJ7jaNX/ZFrpaJ3kQRG5F2LenPt1114ds05nlbQ\nwqQpo8T9vn/QhGYmd+VsHbqoz+nKa3lBmibykeiw/VmX49HozNB9okWJPCsB97tq\n3Uxeqf4oSQKBgDIf7fERu/eugHbKYt89Xy3Yvb1Aj1npQuKb8Ky3K8ovtqIqlUxx\nMTRIQWMTilpW3CqXf+zJ43LkjIUKKix9qpCcl/7tiRB7DM/OBuyoPTyEWWZqW1Hl\n4nlVvUq4y0eYqjSLaTrbfpidFX/IVlBRPW7rV8NppfAWY9SyU2ugay3JAoGAIdkm\nu+xuspzL2DuzT6lq0MgOUCjatCwK2aQNaWoyR8JIbKPHy9hKMtDts9p8JxgmeYPA\ncvUoXNeNmPX9rowq9ytsQsFEjl103Jq6Jv3h8DL+Jh1wbHYeX1h1yCZPHM6X9MdJ\nAPBW3wk4D4ddbzbb1oian6G5vDRLtJx+RfDnkbkCgYBiGWJLl/s7UI6Rh6bpGxx0\n0fsSgU8bHy7cekq38V7JoRRIdbf45RezKFetQ5wvfbLIjEJzzn+ZglLoLoZnITxC\nHYjGcAfVJSLP3j1wv4EH4dRkrygqFEp8eDrtoAHXNiuH9cLQWNOT7vUGkyzuRZPH\nUGDts7S3HQVfcA7uc/hxgw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-7c6rt@fruitshop-1e407.iam.gserviceaccount.com",
+  "client_id": "104633942532144750795",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-7c6rt%40fruitshop-1e407.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
