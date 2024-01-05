@@ -37,9 +37,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "catalog_id", referencedColumnName = "catalog_id")
     private Categories catalog;
-    @OneToMany(mappedBy = "product_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product")
     private List<Images> listImages = new ArrayList<>();
-    @ManyToOne
-    @JoinColumn(name = "bill_detail_id", referencedColumnName = "bill_detail_id")
-    private BillDetail billDetail;
+    @OneToMany(mappedBy = "product")
+    private List<BillDetail> listBillDetail = new ArrayList<>();
 }

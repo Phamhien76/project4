@@ -25,8 +25,9 @@ public class BillDetail {
     @JoinColumn(name = "bill_id", referencedColumnName = "bill_id")
     private Bill bill;
 
-    @OneToMany(mappedBy = "billDetail", fetch = FetchType.EAGER)
-    private List<Product> listProduct = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product product;
 
     @Column(name = "unit_price")
     private float unitPrice;

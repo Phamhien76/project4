@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 @Configuration
 
 public class FirebaseConfig {
-    private final String serviceAccountKeyPath = "C:\\Users\\USER\\Desktop\\TOCAT\\project4\\src\\main\\webapp\\resouces\\firebaseConfig.json";
+    private final String serviceAccountKeyPath = "C:\\Users\\USER\\Desktop\\TOCAT\\project4\\src\\main\\webapp\\resources\\firebaseConfig.json";
 
     @Bean
     public Storage storage() throws IOException {

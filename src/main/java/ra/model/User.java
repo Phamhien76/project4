@@ -22,6 +22,8 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "user_name",columnDefinition = "varchar(50)",nullable = false,unique = true)
+    private String userName;
     @Column(columnDefinition = "varchar(100)",nullable = false,unique = true)
     private String email;
    @Column(columnDefinition = "varchar(200)")
@@ -31,7 +33,7 @@ public class User {
     //Mặc định có quyền user (user:0 - admin:1)
     private boolean permission =false;
     @Column(name = "user_status")
-    private boolean status;
+    private boolean status = true;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Bill> listBill = new ArrayList<>();
 }

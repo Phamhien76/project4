@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 public class Categories {
     @Id
-    @Column(name = "catlog_id")
+    @Column(name = "catalog_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "catalog_name", columnDefinition = "varchar(50)")
