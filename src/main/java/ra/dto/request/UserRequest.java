@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class UserRequest {
-    private String userName;
+    private String name;
     private String email;
     private String password;
 

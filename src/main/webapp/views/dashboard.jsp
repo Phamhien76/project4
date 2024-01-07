@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: USER
@@ -26,31 +27,31 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="<%=request.getContextPath()%>/dashboardController/findAll" class="active">
+            <a href="<%=request.getContextPath()%>/userController/getData" class="active">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/categoriesController/findAll">
+            <a href="<%=request.getContextPath()%>/categoriesController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-coin-stack'></i>
                 <span class="links_name">Categories</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/productController/findAll">
+            <a href="<%=request.getContextPath()%>/productController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-box'></i>
                 <span class="links_name">Products</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/billController/findAll">
+            <a href="<%=request.getContextPath()%>/billController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-list-ul'></i>
                 <span class="links_name">Bill list</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/userController/findAll">
+            <a href="<%=request.getContextPath()%>/userController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-user'></i>
                 <span class="links_name">User</span>
             </a>
@@ -69,14 +70,10 @@
             <i class='bx bx-menu sidebarBtn'></i>
             <span class="dashboard">Dashboard</span>
         </div>
-        <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search' ></i>
-        </div>
-        <div class="profile-details">
-            <!--<img src="images/profile.jpg" alt="">-->
-            <span class="admin_name">Sort</span>
-            <i class='bx bx-chevron-down' ></i>
+
+        <div class="sidebar-button">
+            <i  class='bx bx-user'></i>
+            <span class="dashboard">User</span>
         </div>
     </nav>
 
@@ -87,35 +84,35 @@
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Đã hủy</div>
-                        <div class="number">40,876</div>
+                        <div class="number">${cancel0}</div>
                     </div>
                     <i class='bx bx-cart-alt cart zero'></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Đang chờ</div>
-                        <div class="number">40,876</div>
+                        <div class="number">${waiting1}</div>
                     </div>
                     <i class='bx bx-cart-alt cart'></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Đã duyệt</div>
-                        <div class="number">38,876</div>
+                        <div class="number">${approved2}</div>
                     </div>
                     <i class='bx bxs-cart-add cart two' ></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Đang giao</div>
-                        <div class="number">$12,876</div>
+                        <div class="number">${delivering3}</div>
                     </div>
                     <i class='bx bx-cart cart three' ></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Đã nhận hàng</div>
-                        <div class="number">11,086</div>
+                        <div class="number">${received4}</div>
                     </div>
                     <i class='bx bxs-cart-download cart four' ></i>
                 </div>
@@ -137,11 +134,11 @@
                     </ul>
                     <ul class="details">
                         <li class="topic">Tổng</li>
-                        <li><a href="#">$204.98</a></li>
-                        <li><a href="#">$24.55</a></li>
+                        <li><a href="#">${userActive}</a></li>
+                        <li><a href="#">${userInactive} </a></li>
                         <li class="topic">Tổng </li>
-                        <li><a href="#">$25.88</a></li>
-                        <li><a href="#">$170.66</a></li>
+                        <li><a href="#">${productActive}</a></li>
+                        <li><a href="#">${productInactive}</a></li>
                     </ul>
                 </div>
 
@@ -152,7 +149,10 @@
                     <li>
                         <a href="#">
                             <!--<img src="images/sunglasses.jpg" alt="">-->
-                            <span class="product">Theo ngày</span>
+                            <span class="product">Theo ngày </span>
+                            <select id="byDay" name="byDay" th:field="${selectedDay}">
+                                <option th:each="day : ${numbers.sequence(1, 31)}" th:value="${day}" th:text="${day}"></option>
+                            </select>
                         </a>
                         <span class="price">$1107</span>
                     </li>
@@ -160,6 +160,9 @@
                         <a href="#">
                             <!--<img src="images/jeans.jpg" alt="">-->
                             <span class="product">Theo Tháng </span>
+                            <select id="byMonth" name="byMonth" th:field="${selectedMonth}">
+                                <option th:each="month : ${numbers.sequence(1, selectedMonthLength)}" th:value="${month}" th:text="${month}"></option>
+                            </select>
                         </a>
                         <span class="price">$1567</span>
                     </li>

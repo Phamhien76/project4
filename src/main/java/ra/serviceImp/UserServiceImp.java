@@ -45,20 +45,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<User> sortBy(String sortDir, String sortBy, int page, int sizw) {
-        Pageable pageable;
-        if (sortDir.equals("ASC")){
-            pageable = PageRequest.of(page,sizw, Sort.by(sortBy).ascending());
-        }else{
-            pageable = PageRequest.of(page,sizw, Sort.by(sortBy).descending());
-        }
+    public List<User> findAllSort(String sortDir, String sortBy, int page, int size) {
+        Pageable pageable = PageRequest.of(page,size,sortDir.equals("ASC")? Sort.Direction.ASC: Sort.Direction.DESC,sortBy);
         return userRepository.findAll(pageable).getContent();
     }
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        User user = loginMapper.mapperRequestToEntity(loginRequest);
-        Optional<User> userLogin = userRepository.login(user);
+        Optional<User> userLogin = userRepository.login(loginRequest.getEmail(),loginRequest.getPassword());
         if (userLogin.isPresent()){
             return  loginMapper.mapperEntityToResponse(userLogin.get());
         }
@@ -71,5 +65,10 @@ public class UserServiceImp implements UserService {
         updateUserStatus.setStatus(user.isStatus());
         User userSta = userRepository.save(updateUserStatus);
         return userSta != null? true:false;
+    }
+
+    @Override
+    public long countUser() {
+        return userRepository.count();
     }
 }

@@ -28,7 +28,7 @@ public class Bill {
     private User user;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date crated;
+    private Date crated = new Date();
 
     @Column(name = "bill_status")
     private int status;

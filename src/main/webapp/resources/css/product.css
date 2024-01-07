@@ -1,3 +1,4 @@
+
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -118,19 +119,21 @@ nav .sidebar-button i{
     position: relative;
     padding-top: 104px;
 }
-.home-content .bill {
-    width: 100%;
-    background: #fff;
-    padding: 20px 30px;
-    margin: 0 20px 0 0;
-    border-radius: 12px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 
-.home-content .bill .home-button {
+.table {
+    position: absolute;
+    top: 300px;
+}
+
+    .home-content .bill .home-button {
         font-size: 35px;
         margin-right: 10px;
     }
-    .home-button .add-box{
+.nav{
+    background:#f5f5f5 ;
+
+    .nav .create{
+        font-size: 30px;
         position: relative;
         height: 50px;
         max-width: 550px;
@@ -138,9 +141,9 @@ nav .sidebar-button i{
         margin: 0 20px;
     }
 
-    .home-button .search-box {
+    .nav .search-box {
         position: relative;
-        height: 50px;
+        height: 100px;
         max-width: 550px;
         width: 100%;
         margin: 0 20px;
@@ -173,7 +176,8 @@ nav .sidebar-button i{
         transition: all;
     }
 
-    .home-button .profile-details {
+
+    .nav .sort {
         display: flex;
         align-items: center;
         background: #F5F6FA;
@@ -184,7 +188,7 @@ nav .sidebar-button i{
         padding: 0 15px 0 2px;
     }
 
-     .profile-details img {
+    .profile-details img {
         height: 40px;
         width: 40px;
         border-radius: 6px;
@@ -199,10 +203,104 @@ nav .sidebar-button i{
         white-space: nowrap;
     }
 
-    .nav .profile-details i {
+   .nav .profile-details i {
         font-size: 25px;
         color: #333;
     }
 }
 
+
+
+
+.resize-img-home img{
+    width: 130px;
+    display: block;
+}
+.clo-3{
+
+}
+#divHeThong{
+    color: rgb(250, 69, 69);
+    font-size: 40px;
+    margin: 30px;
+}
+.buttonSize{
+    display: block;
+}
+#divBody{
+    margin: 20px;
+}
+
+.size_img img{
+    width: 400px;
+    display: block;
+    margin: 30px;
+}
+h2{
+    text-align: center;
+    margin: 30px;
+}
+
+#seach{
+    margin: 30px;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.resize-img-home img{
+    width: 200px;
+    display: block;
+    background-color: aliceblue;
+}
+.clo-3{
+
+}
+#divHeThong{
+    color: rgb(243, 240, 240);
+    font-size: 50px;
+    margin: 30px;
+}
+.buttonSize{
+    display: block;
+    margin-bottom: 20px;
+}
+#divBody{
+
+}
+
+
+#seach{
+    margin: 30px;
+}
+
+#phuongCham{
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+}
+#lightConten{
+
+    height: 700px;
+}
+#center{
+
+    height: 700px;
+}
+#footer{
+
+    height: 200px;
+
+}
+#container{
+    color: white;
+}
+#chinhText{
+    margin-left:  40px;
+}
+main{
+    height: 700px;
+}
 

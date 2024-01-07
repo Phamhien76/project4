@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface CategoriesService {
-    List<Categories> findAll();
+    List<Categories> findAll( );
     Categories findById(int catalogId);
     List<Categories> findCateByName(String catalogName);
     //sort co phan trang nhe
@@ -16,8 +16,9 @@ public interface CategoriesService {
     * page: trang hien thi (trang 0, 1,2, 3...)
     * size: so du lieu hien thi tren 1 trang
     * */
-    List<Categories> sort(String sortDir, String sortBy, int page, int sizw);
+    List<Categories> findAllSort(String sortDir, String sortBy, int page, int size);
     boolean save(Categories categories);
     boolean update (Categories categories);
     boolean delete(int catalogId);
+    long countProduct();
 }

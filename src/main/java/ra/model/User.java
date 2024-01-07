@@ -22,9 +22,9 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "user_name",columnDefinition = "varchar(50)",nullable = false,unique = true)
-    private String userName;
-    @Column(columnDefinition = "varchar(100)",nullable = false,unique = true)
+    @Column(name = "user_name",columnDefinition = "varchar(50)",nullable = false)
+    private String name;
+    @Column(columnDefinition = "varchar(100)",nullable = false)
     private String email;
    @Column(columnDefinition = "varchar(200)")
     private String password;

@@ -23,34 +23,23 @@ public class UploadFileServiceImp implements UploadFileService {
     @Autowired
     private ServletContext servletContext;
     private final String BUCK_NAME = "fruitshop-1e407.appspot.com";
-    /*
-     * 1. Tạo thư mục upload trong tomcat
-     * 2. Copy ảnh từ multipart sang thư mục upload
-     * 3. Truyền đường dẫn ảnh trong upload sang method uploadFileLocalToFirebase*/
     @Override
     public String uploadFile(MultipartFile multipartFile) {
-        //Tạo thư mục tạm uploads trong server tomcat
         String pathUpload = servletContext.getRealPath("/");
         File uploadFolder = new File(pathUpload+"/uploads");
         if (!uploadFolder.exists()){
             uploadFolder.mkdirs();
         }
-        //copy ảnh từ multipart sang thư mục uploads
         String fileName = multipartFile.getOriginalFilename();
         File fileUpload = new File(uploadFolder+File.separator+fileName);
+
         try {
             FileCopyUtils.copy(multipartFile.getBytes(), fileUpload);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //Gọi phương thức upload lên firebase và truyền đối số là đường dẫn ảnh trên tomcat
         return uploadFileLocalToFirebase(uploadFolder+File.separator+fileName);
     }
-    /*
-     * 1. lấy dữ liệu ảnh trong thư mục uploads của tomcat
-     * 2. upload lên firebase
-     * 3. return url ảnh trên firebase
-     * */
 
     @Override
     public String uploadFileLocalToFirebase(String localFilePath) {
@@ -70,4 +59,5 @@ public class UploadFileServiceImp implements UploadFileService {
             throw new RuntimeException(e);
         }
     }
+
 }

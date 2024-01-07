@@ -7,33 +7,27 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <html>
 <head>
     <title>Login</title>
+    <link href="<%=request.getContextPath()%>/resources/css/login.css" rel="stylesheet"/>
+    <script src="https://use.typekit.net/rjb4unc.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
 </head>
 <body>
-<div class="login-box">
-    <h2>Login</h2>
-    <form>
-        <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Email</label>
-        </div>
-        <div class="user-box">
-            <input type="password" name="" required="">
-            <label>Password</label>
-        </div>
+
+<form action="<%=request.getContextPath()%>/userController/login" method="post" class="form form-login">
+    <div class="login wrap">
+        <input type="text" name="email" id="email" placeholder="Email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"/>
+        <input type="password" name="password" id="password" placeholder="Password" />
         <c:if test="${not empty error}">
             <label style="color:red">${error}</label><br>
         </c:if>
-        <a href="<%response.sendRedirect("/views/dashboard.jsp");%>">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-        </a>
-    </form>
-</div>
+        <input type="button" value="Help!" />
+        <input type="submit" value="Log in" />
+    </div>
+</form>
 </body>
 </html>

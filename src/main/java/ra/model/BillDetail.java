@@ -28,11 +28,8 @@ public class BillDetail {
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
-
-    @Column(name = "unit_price")
-    private float unitPrice;
+    private float price;
     private int quantity;
-    @Column(name = "total_amount")
-    private float totalAmount;
-
+    @Column(name = "total")
+    private float total=0;
 }

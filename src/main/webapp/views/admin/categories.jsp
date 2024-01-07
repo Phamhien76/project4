@@ -13,7 +13,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboad</title>
-    <link href="<%=request.getContextPath()%>/resources/css/categories.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/css/product.css" rel="stylesheet"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet"/>
@@ -70,35 +73,36 @@
             <i class='bx bx-menu sidebarBtn'></i>
             <span class="dashboard">Categories</span>
         </div>
-        <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search' ></i>
-        </div>
-        <div class="profile-details">
-            <!--<img src="images/profile.jpg" alt="">-->
-            <span class="admin_name">Sort</span>
-            <i class='bx bx-chevron-down' ></i>
-        </div>
     </nav>
 
 
     <div class="home-content">
-        <div>
-            <div>
-                <a class="btn btn-default" href="<%=request.getContextPath()%>/views/admin/newCategories.jsp">
-                    <span class="glyphicon glyphicon-plus"></span>Add product</a>
+
+        <nav class="nav">
+            <div class="create">
+                <a href="<%=request.getContextPath()%>/productController/initCreate">Create</a>
             </div>
             <div class="search-box">
                 <input type="text" placeholder="Search...">
                 <i class='bx bx-search' ></i>
             </div>
-            <div class="profile-details">
-                <span class="admin_name">Sort</span>
-                <i class='bx bx-chevron-down' ></i>
+            <div class="sort">
+                <form action="<%=request.getContextPath()%>/categoriesController/findAllSort" method="post" >
+                    <label for="orderDir">Order:</label>
+                    <select id="orderDir" name="orderDir">
+                        <option value="id">Catalog Id</option>
+                        <option value="name">Catalog Name</option>
+                    </select>
+                    <select id="orderBy" name="orderBy">
+                        <option value="ASC">ASC</option>
+                        <option value="DESC">DESC</option>
+                    </select><br>
+                    <input type="submit" value="Search">
+                </form>
             </div>
-        </div>
+        </nav>
 
-        <table border="1">
+        <table class="table table-bordered" id="table">
             <thead>
             <tr>
                 <th>Catalog Id</th>
@@ -108,7 +112,7 @@
                 <th>Action</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="listStudent">
             <c:forEach items="${listCategories}" var="cate">
                 <tr>
                     <td>${cate.id}</td>
@@ -123,12 +127,27 @@
                 </tr>
             </c:forEach>
 
-
             </tbody>
         </table>
-
+        </table>
+        <c:forEach items="${listPage}" var="page">
+            <a href="/categoriesController/findAll?page=${page}&&sortBy=id&&sortDir=ASC">${page}</a>
+        </c:forEach>
     </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></script>
 </body>
 </html>
+
+
 

@@ -1,8 +1,12 @@
 package ra.serviceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ra.model.Categories;
 import ra.model.Images;
 import ra.model.Product;
 import ra.repository.ImagesRepository;
@@ -22,7 +26,7 @@ public class ProductServiceImp implements ProductService {
     private ImagesRepository imagesRepository;
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        return productRepository.findAll() ;
     }
 
     @Override
@@ -31,15 +35,16 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public List<Product> findProByNameOrPrice(String findName) {
-        return productRepository.findByNameContainsAndAndPrice(findName);
+    public List<Product> findByNameContainsAndTitleContains(String findName, String title) {
+        return productRepository.findByNameContainsAndTitleContains(findName,title);
     }
 
     @Override
-    public List<Product> sort() {
-        return null;
-    }
+    public List<Product> findAllSort(String sortDir, String sortBy, int page, int size) {
+        Pageable pageable = PageRequest.of(page,size,sortDir.equals("ASC")? Sort.Direction.ASC: Sort.Direction.DESC,sortBy);
+        return productRepository.findAll(pageable).getContent();
 
+    }
     @Override
     public boolean save(Product product, MultipartFile avatar, MultipartFile[] otherImages) {
         //1.upload avartar và otherImages lên firebase và lấy lại đường link
@@ -85,5 +90,10 @@ public class ProductServiceImp implements ProductService {
             ex.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public long countProduct() {
+        return productRepository.count();
     }
 }
