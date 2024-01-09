@@ -15,6 +15,6 @@ public class LoginMapper implements MapperGeneric<User, LoginRequest, LoginRespo
 
     @Override
     public LoginResponse mapperEntityToResponse(User user) {
-        return new LoginResponse(user.getId(), user.getPassword(), user.isPermission());
+        return new LoginResponse(user.getId(), user.getEmail(), user.isPermission(),user.getName());
     }
 }

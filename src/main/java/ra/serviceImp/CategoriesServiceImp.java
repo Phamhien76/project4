@@ -30,8 +30,9 @@ private CategoriesRepository categoriesRepository;
     }
 
     @Override
-    public List<Categories> findCateByName(String catalogName) {
-       return categoriesRepository.findByNameContains(catalogName);
+    public List<Categories> findCateByName(String catalogName, int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+       return categoriesRepository.findAllByNameContains(catalogName,pageable).getContent();
     }
 
     @Override
@@ -82,7 +83,10 @@ private CategoriesRepository categoriesRepository;
     }
 
     @Override
-    public long countProduct() {
+    public long countCate() {
         return categoriesRepository.count();
     }
+
+
+
 }

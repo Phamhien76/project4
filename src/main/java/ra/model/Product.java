@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -35,8 +33,12 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "catalog_id", referencedColumnName = "catalog_id")
     private Categories catalog;
-    @OneToMany(mappedBy = "product")
-    private List<Images> listImages = new ArrayList<>();
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    private List<BillDetail> listBillDetail = new ArrayList<>();
+    //Thì phải để EAGER thì nó mới lấy image khi lây product chứ
+    // em biết nhưng cho để EA thì sever bị lô không chạy thầy ạ, chạy lại đi
+    // lỗi luôn thày
+    //Bị duplicate cai product, 1 c
+//    @OneToMany(mappedBy = "productImage")
+//    private List<Images> listImages = new ArrayList<>();
+//    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+//    private List<BillDetail> listBillDetail = new ArrayList<>();
 }

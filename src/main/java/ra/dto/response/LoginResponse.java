@@ -11,5 +11,6 @@ public class LoginResponse {
     private int Id;
     private String email;
     private boolean permission;
+    private String username;
 
 }

@@ -71,35 +71,16 @@
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Categories</span>
+            <span class="dashboard">Bill Detail</span>
+        </div>
+        <div class="sidebar-button">
+            <i  class='bx bx-user'></i>
+            <span class="dashboard"><%=session.getAttribute("name")%></span>
         </div>
     </nav>
 
 
     <div class="home-content">
-
-        <nav class="nav">
-            <div class="create">
-                <a href="<%=request.getContextPath()%>/productController/initCreate">Create</a>
-            </div>
-            <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search' ></i>
-            </div>
-            <div class="sort">
-                <form action="<%=request.getContextPath()%>/billController/findAllSort" method="post" >
-                    <label for="orderDir">Order:</label>
-                    <select id="orderDir" name="orderDir">
-                        <option value="create">Create</option>
-                    </select>
-                    <select id="orderBy" name="orderBy">
-                        <option value="ASC">ASC</option>
-                        <option value="DESC">DESC</option>
-                    </select><br>
-                    <input type="submit" value="Search">
-                </form>
-            </div>
-        </nav>
 
         <table class="table table-bordered" id="table">
             <thead>
@@ -113,7 +94,7 @@
             </tr>
             </thead>
             <tbody id="listStudent">
-            <c:forEach items="${billDetail}" var="bd">
+            <c:forEach items="${listBillDetail}" var="bd">
                 <tr>
                     <td>${bd.id}</td>
                     <td>${bd.bill.id}</td>
@@ -126,6 +107,9 @@
 
             </tbody>
         </table>
+       <div class="page">
+           <a class="btn btn-warning btn-xs" href="<%=request.getContextPath()%>/billController/findAll?page=1&sortBy=id&sortDir=ASC" >Back</a>
+       </div>
     </div>
 </section>
 

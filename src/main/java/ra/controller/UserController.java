@@ -3,9 +3,7 @@ package ra.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ra.dto.request.LoginRequest;
 import ra.dto.response.LoginResponse;
@@ -19,6 +17,7 @@ import ra.service.UserService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,14 +48,15 @@ public class UserController {
     }
 
     @PostMapping("/findAllSort")
-    public ModelAndView findAllSort(String sortDir, String sortBy, Integer page){
+    public ModelAndView findAllSort(@ModelAttribute(name = "sortDir" ) String sortDir,
+                                    @ModelAttribute(name = "sortBy" ) String sortBy){
         ModelAndView mav = new ModelAndView("admin/user");
         int totalPage = (int)Math.ceil((double) userService.countUser()/(double) SIZE);
         List<Integer> listPage = new ArrayList<>();
         for (int i = 0; i<totalPage;i++){
             listPage.add(i+1);
         }
-        List<User> listUser = userService.findAllSort(sortDir,sortBy,(page-1),SIZE);
+        List<User> listUser = userService.findAllSort(sortDir,sortBy,0,SIZE);
         mav.addObject("listUser", listUser);
         mav.addObject("listPage",listPage);
         return mav;
@@ -75,7 +75,7 @@ public class UserController {
         return "user/userPage";
     }
     @PostMapping("/login")
-    public String login(LoginRequest loginRequest, ModelMap modelMap, HttpServletResponse response, HttpServletRequest request){
+    public String login(HttpSession session, LoginRequest loginRequest, ModelMap modelMap, HttpServletResponse response, HttpServletRequest request){
         LoginResponse loginResponse = userService.login(loginRequest);
         if (loginResponse == null){
             modelMap.addAttribute("error","Email or password incorrect");
@@ -87,6 +87,7 @@ public class UserController {
         response.addCookie(cookieUserId);
         response.addCookie(cookieEmail);
         response.addCookie(cookiePermission);
+        session.setAttribute("name",loginResponse.getUsername());
         if (loginResponse.isPermission()){
             return "redirect:getData";
 
@@ -97,21 +98,29 @@ public class UserController {
     public String loginGet(){
         return "login";
     }
-    @GetMapping("/initUpdate")
-    public ModelAndView initUpdateStatus(int userId){
+    @GetMapping("/updateStatus")
+    public String initUpdateStatus(@RequestParam("userId") Integer userId){
         User userUpdateStatus = userService.findById(userId);
-        ModelAndView mav = new ModelAndView("admin/updateUser");
-        mav.addObject("userUpdateStatus", userUpdateStatus);
-        return mav;
-    }
-
-@PostMapping("/update")
-    public String updateStatus(User user){
-        boolean result = userService.block(user);
+        boolean result = userService.block(userUpdateStatus);
         if (result){
-            return "redirect:findAll";
+            return "redirect:findAll?page=1&sortDir=ASC&sortBy=id";
         }
         return "error";
+    }
+
+    @PostMapping("/searchSortUser")
+    public ModelAndView searchSortCate(@RequestParam("email") String email){
+        ModelAndView mav = new ModelAndView("admin/user");
+        int totalPage = (int)Math.ceil((double) userService.countUser()/(double) SIZE);
+        List<Integer> listPage = new ArrayList<>();
+        for (int i = 0; i<totalPage;i++){
+            listPage.add(i+1);
+        }
+        List<User> listUser= userService.findByEmail(email,0,SIZE);
+        mav.addObject("listUser", listUser);
+        mav.addObject("listPage",listPage);
+        return mav;
+
     }
 
     @GetMapping("/getData")
@@ -176,6 +185,28 @@ public class UserController {
         return mav;
 
 
+    }
+
+    @GetMapping("/total")
+    public ModelAndView total(@RequestParam(name = "day") int day ){
+        ModelAndView mav = new ModelAndView("dashboard");
+      Double totalDay = billService.totalRevenueDay(day);
+        mav.addObject("totalDay",totalDay);
+        return mav;
+    }
+    @GetMapping("/totalMonth")
+    public ModelAndView totalMonth(@RequestParam(name = "month") int month ){
+        ModelAndView mav = new ModelAndView("dashboard");
+        Double totalMonth = billService.totalRevenueDay(month);
+        mav.addObject("totalMonth",totalMonth);
+        return mav;
+    }
+    @GetMapping("/totalYear")
+    public ModelAndView totalYear(@RequestParam(name = "year") int year ){
+        ModelAndView mav = new ModelAndView("dashboard");
+        Double totalYear = billService.totalRevenueYear(year);
+        mav.addObject("totalYear",totalYear);
+        return mav;
     }
 
 }

@@ -2,14 +2,10 @@ package ra.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ra.model.Bill;
 import ra.model.BillDetail;
-import ra.model.User;
-import ra.repository.BillDetailRepository;
 import ra.service.BillService;
 
 import java.util.ArrayList;
@@ -24,7 +20,7 @@ public class BillController {
     @GetMapping("/findAll")
     public ModelAndView findAll(String sortDir, String sortBy, Integer page){
         ModelAndView mav = new ModelAndView("admin/bill");
-        int totalPage = (int)Math.ceil((double) billService.countProduct()/(double) SIZE);
+        int totalPage = (int)Math.ceil((double) billService.countBill()/(double) SIZE);
         List<Integer> listPage = new ArrayList<>();
         for (int i = 0; i<totalPage;i++){
             listPage.add(i+1);
@@ -37,14 +33,15 @@ public class BillController {
     }
 
     @PostMapping("/findAllSort")
-    public ModelAndView findAllSort(String sortDir, String sortBy, Integer page){
+    public ModelAndView findAllSort(@ModelAttribute(name = "sortDir" ) String sortDir,
+                                    @ModelAttribute(name = "sortBy" ) String sortBy){
         ModelAndView mav = new ModelAndView("admin/bill");
-        int totalPage = (int)Math.ceil((double) billService.countProduct()/(double) SIZE);
+        int totalPage = (int)Math.ceil((double) billService.countBill()/(double) SIZE);
         List<Integer> listPage = new ArrayList<>();
         for (int i = 0; i<totalPage;i++){
             listPage.add(i+1);
         }
-        List<Bill> listBill = billService.findAllSort(sortDir,sortBy,(page-1),SIZE);
+        List<Bill> listBill = billService.findAllSort(sortDir,sortBy,0,SIZE);
         mav.addObject("listBill", listBill);
         mav.addObject("listPage",listPage);
         return mav;
@@ -52,13 +49,43 @@ public class BillController {
     }
 
     @GetMapping("/findAllBD")
-    public ModelAndView findAllBD(int id){
-        ModelAndView mav = new ModelAndView("admin/bill");
-        BillDetail billDetail = billService.finAllBD(id);
-        mav.addObject("billDetail",billDetail);
+    public ModelAndView findAllBD(@RequestParam(name = "billId",defaultValue = "") int id){
+        ModelAndView mav = new ModelAndView("admin/billDetail");
+        List<BillDetail> listBillDetail = billService.finAllBD(id);
+        mav.addObject("listBillDetail",listBillDetail);
         return mav;
     }
 
+    @GetMapping("/initUpdate")
+    public ModelAndView initUpdateBill(int billId){
+        Bill billUpdateStatus = billService.findById(billId);
+        ModelAndView mav = new ModelAndView("admin/updateBill");
+        mav.addObject("billUpdateStatus", billUpdateStatus);
+        return mav;
+    }
 
+    @GetMapping("/update")
+    public String updateStatus(@RequestParam("id") int id,@RequestParam("status") int status){
+
+        boolean result = billService.update(id,status);
+        if (result){
+            return "redirect:findAll?page=1&sortDir=ASC&sortBy=id";
+        }
+        return "error";
+    }
+    @GetMapping("/searchSortBill")
+    public ModelAndView searchSortBill(@RequestParam("status") String status){
+        ModelAndView mav = new ModelAndView("admin/bill");
+        int totalPage = (int)Math.ceil((double) billService.countBill()/(double) SIZE);
+        List<Integer> listPage = new ArrayList<>();
+        for (int i = 0; i<totalPage;i++){
+            listPage.add(i+1);
+        }
+        List<Bill> listBill = billService.findAllByStatus(status,0,SIZE);
+        mav.addObject("listBill",listBill);
+        mav.addObject("listPage",listPage);
+        return mav;
+
+    }
 
 }

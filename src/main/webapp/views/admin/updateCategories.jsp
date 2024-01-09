@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboad</title>
-    <link href="<%=request.getContextPath()%>/resources/css/dashboard.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/resources/css/newCategories.css" rel="stylesheet"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -72,6 +72,10 @@
             <i class='bx bx-menu sidebarBtn'></i>
             <span class="dashboard">Categories</span>
         </div>
+        <div class="sidebar-button">
+            <i  class='bx bx-user'></i>
+            <span class="dashboard"><%=session.getAttribute("name")%></span>
+        </div>
     </nav>
 
 
@@ -79,19 +83,19 @@
     <form action="<%=request.getContextPath()%>/categoriesController/update" method="post"  >
         <div class="modal-body">
             <div class="mb-3 row">
-                <label for="id" class="col-sm-3 col-form-label" placeholder="Nhập vào mã danh mục">Catalog Id</label>
+                <label for="id" class="col-sm-3 col-form-label" >Catalog Id</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="id" name="id" value="${updateCategories.id}"/>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="name" class="col-sm-3 col-form-label" placeholder="Nhập vào tên sản phẩm">Catalog name</label>
+                <label for="name" class="col-sm-3 col-form-label" >Catalog name</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="name" name="name" value="${updateCategories.name}"/>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="description" class="col-sm-3 col-form-label" placeholder="Nhập vào mô tả">Description</label>
+                <label for="description" class="col-sm-3 col-form-label" >Description</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="description" name="description" value="${updateCategories.description}" />
                 </div>
@@ -105,7 +109,7 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" id="btnCreateStudent" >Save</button>
-                <a href=<%=request.getContextPath()%>/categoriesController/findAll"  class="btn btn-secondary" >Cancel</a>
+                <a href=<%=request.getContextPath()%>/categoriesController/findAll?page=1&sortBy=id&sortDir=ASC"  class="btn btn-secondary" >Cancel</a>
             </div>
         </div>
     </form>

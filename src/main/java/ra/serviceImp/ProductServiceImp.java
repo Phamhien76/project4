@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ra.model.Categories;
 import ra.model.Images;
 import ra.model.Product;
 import ra.repository.ImagesRepository;
@@ -35,8 +34,9 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public List<Product> findByNameContainsAndTitleContains(String findName, String title) {
-        return productRepository.findByNameContainsAndTitleContains(findName,title);
+    public List<Product> findByNameContainsOrTitleContains(String findName, String title, int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        return productRepository.findAllByNameOrTitleContainingIgnoreCase(findName,title,pageable).getContent();
     }
 
     @Override
@@ -47,6 +47,7 @@ public class ProductServiceImp implements ProductService {
     }
     @Override
     public boolean save(Product product, MultipartFile avatar, MultipartFile[] otherImages) {
+        //Đây là chỗ save product và các ảnh đúng không emdaj
         //1.upload avartar và otherImages lên firebase và lấy lại đường link
         //Upload ảnh avatar
         String avartar_link = uploadFileService.uploadFile(avatar);
@@ -59,7 +60,7 @@ public class ProductServiceImp implements ProductService {
             String link = uploadFileService.uploadFile(file);
             Images images = new Images();
             images.setImageLink(link);
-            images.setProduct(proNew);
+            images.setProductImage(proNew);
             imagesRepository.save(images);
         }
         return proNew != null ? true : false;
@@ -73,7 +74,7 @@ public class ProductServiceImp implements ProductService {
         proUpdate.setPrice(product.getPrice());
         proUpdate.setTitle(product.getTitle());
         proUpdate.setDescription(product.getDescription());
-        proUpdate.setAvatarImage(product.getAvatarImage());
+//        proUpdate.setAvatarImage(product.getAvatarImage());
         proUpdate.setUnit(product.getUnit());
         proUpdate.setStatus(product.isStatus());
         Product pro = productRepository.save(proUpdate);

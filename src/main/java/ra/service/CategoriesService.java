@@ -8,7 +8,7 @@ import java.util.List;
 public interface CategoriesService {
     List<Categories> findAll( );
     Categories findById(int catalogId);
-    List<Categories> findCateByName(String catalogName);
+    List<Categories> findCateByName(String catalogName, int page, int size);
     //sort co phan trang nhe
     /*
     * sortDir: ASC - tang dan, DESC - giam dan
@@ -20,5 +20,7 @@ public interface CategoriesService {
     boolean save(Categories categories);
     boolean update (Categories categories);
     boolean delete(int catalogId);
-    long countProduct();
+    long countCate();
+
+
 }

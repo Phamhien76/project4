@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: USER
   Date: 2024/01/03
-  Time: 14:57
+  Time: 16:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,11 +11,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Categories</title>
+    <title>Admin Dashboad</title>
     <link href="<%=request.getContextPath()%>/resources/css/newCategories.css" rel="stylesheet"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet"/>
 </head>
@@ -28,38 +29,38 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="<%=request.getContextPath()%>/userController/getData" class="active">
+            <a href="<%=request.getContextPath()%>/dashboardController/findAll" class="active">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/categoriesController/findAll?page=1&sortBy=id&sortDir=ASC">
-                <i  class='bx bx-coin-stack'></i>
+            <a href="<%=request.getContextPath()%>/categoriesController/findAll">
+                <i class='bx bx-coin-stack'></i>
                 <span class="links_name">Categories</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/productController/findAll?page=1&sortBy=id&sortDir=ASC">
-                <i  class='bx bx-box'></i>
+            <a href="<%=request.getContextPath()%>/productController/findAll">
+                <i class='bx bx-box'></i>
                 <span class="links_name">Products</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/billController/findAll?page=1&sortBy=id&sortDir=ASC">
-                <i  class='bx bx-list-ul'></i>
+            <a href="<%=request.getContextPath()%>/billController/findAll">
+                <i class='bx bx-list-ul'></i>
                 <span class="links_name">Bill list</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/userController/findAll?page=1&sortBy=id&sortDir=ASC">
-                <i  class='bx bx-user'></i>
+            <a href="<%=request.getContextPath()%>/userController/findAll">
+                <i class='bx bx-user'></i>
                 <span class="links_name">User</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/views/login.jsp">
-                <i  class='bx bx-log-out'></i>
+            <a href="">
+                <i class='bx bx-log-out'></i>
                 <span class="links_name">Log out</span>
             </a>
         </li>
@@ -69,7 +70,7 @@
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Categories</span>
+            <span class="dashboard">Bill</span>
         </div>
         <div class="sidebar-button">
             <i  class='bx bx-user'></i>
@@ -77,39 +78,30 @@
         </div>
     </nav>
 
-    <div class="home-content">
-        <form class="form" action="<%=request.getContextPath()%>/categoriesController/create" method="post" >
-            <div class="modal-body">
-                <div class="mb-3 row">
-                    <label for="name" class="col-sm-3 col-form-label" placeholder="Nhập vào tên sản phẩm">Catalog name</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="name" name="name"/>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="description" class="col-sm-3 col-form-label" placeholder="Nhập vào mô tả">Description</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="description" name="description" />
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="active" class="col-sm-3 col-form-label">Status</label>
-                    <div class="col-sm-9">
-                        <input type="radio" name="status" id="active" value="true" checked /><label for="active">Active</label>
-                        <input type="radio" name="status" id="inactive" value="false" /><label for="inactive">Inactive</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btnCreateStudent" >Add</button>
-                    <a href=<%=request.getContextPath()%>/categoriesController/findAll?page=1&sortBy=id&sortDir=ASC"  class="btn btn-secondary" >Cancel</a>
-                </div>
+    <div>
+        <form action="<%=request.getContextPath()%>/billController/update" method="get">
+            <input type="text" name="id" value="${billUpdateStatus.id}">
+            <div class="mb-3 row">
+                <label for="status" class="col-sm-3 col-form-label">Status</label>
+                <select name="status" id="status">
+                    <option value="0">Hủy</option>
+                    <option value="1">Đang chờ</option>
+                    <option value="2">Đã duyệt</option>
+                    <option value="3">Đang giao</option>
+                    <option value="4">Đã nhận hàng</option>
+                </select>
             </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnCreateStudent">Save</button>
+                <a href=<%=request.getContextPath()%>/billController/findAll?page=1&sortBy=id&sortDir=ASC"
+                   class="btn btn-secondary">Cancel</a>
+            </div>
+
         </form>
     </div>
+
+
 </section>
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
@@ -120,9 +112,6 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></script>
-
 </body>
 </html>
-
-
 

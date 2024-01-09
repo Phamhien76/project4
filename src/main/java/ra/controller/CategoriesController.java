@@ -2,13 +2,9 @@ package ra.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ra.model.Categories;
-import ra.model.Product;
 import ra.service.CategoriesService;
 
 import java.util.ArrayList;
@@ -20,11 +16,11 @@ public class CategoriesController {
     @Autowired
     private CategoriesService categoriesService;
 
-    private final int SIZE = 3;
+    private static final int SIZE = 3;
     @GetMapping("/findAll")
     public ModelAndView findAll(String sortDir, String sortBy, Integer page){
         ModelAndView mav = new ModelAndView("admin/categories");
-        int totalPage = (int)Math.ceil((double) categoriesService.countProduct()/(double) SIZE);
+        int totalPage = (int)Math.ceil((double) categoriesService.countCate()/(double) SIZE);
         List<Integer> listPage = new ArrayList<>();
         for (int i = 0; i<totalPage;i++){
             listPage.add(i+1);
@@ -36,9 +32,11 @@ public class CategoriesController {
     }
 
     @PostMapping("/findAllSort")
-    public ModelAndView findAllSort(String sortDir, String sortBy, Integer page){
+    public ModelAndView findAllSort(
+            @ModelAttribute(name = "sortDir" ) String sortDir,
+            @ModelAttribute(name = "sortBy" ) String sortBy){
         ModelAndView mav = new ModelAndView("admin/categories");
-        int totalPage = (int)Math.ceil((double) categoriesService.countProduct()/(double) SIZE);
+        int totalPage = (int)Math.ceil((double) categoriesService.countCate()/(double) SIZE);
         List<Integer> listPage = new ArrayList<>();
         for (int i = 0; i<totalPage;i++){
             listPage.add(i+1);
@@ -53,7 +51,7 @@ public class CategoriesController {
     public String createCate(Categories cateNew ){
         boolean result = categoriesService.save(cateNew);
         if (result){
-            return "redirect:findAll";
+            return "redirect:findAll?page=1&sortDir=ASC&sortBy=id";
         }else{
             return "error";
         }
@@ -71,7 +69,7 @@ public class CategoriesController {
     public String updateCate(@ModelAttribute Categories cateUpdate){
         boolean result = categoriesService.update(cateUpdate);
         if (result){
-            return "redirect: findAll";
+            return "redirect:findAll?page=1&sortDir=ASC&sortBy=id";
         }else {
             return "error";
         }
@@ -80,10 +78,25 @@ public class CategoriesController {
     public String deleteCate(int catalogId){
         boolean result = categoriesService.delete(catalogId);
         if (result){
-            return "redirect: findAll";
+            return "redirect:findAll?page=1&sortDir=ASC&sortBy=id";
         }else {
             return "error";
         }
+    }
+
+    @PostMapping("/searchSortCate")
+    public ModelAndView searchSortCate(@RequestParam("name") String catalogName){
+        ModelAndView mav = new ModelAndView("admin/categories");
+        int totalPage = (int)Math.ceil((double) categoriesService.countCate()/(double) SIZE);
+        List<Integer> listPage = new ArrayList<>();
+        for (int i = 0; i<totalPage;i++){
+            listPage.add(i+1);
+        }
+        List<Categories> listCategories = categoriesService.findCateByName(catalogName,0,SIZE);
+        mav.addObject("listCategories",listCategories);
+        mav.addObject("listPage",listPage);
+        return mav;
+
     }
 
 

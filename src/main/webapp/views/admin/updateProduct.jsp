@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: USER
@@ -20,10 +21,6 @@
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet"/>
 </head>
-
-
-
-
 
 
 <body>
@@ -76,20 +73,13 @@
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Categories</span>
+            <span class="dashboard">Product</span>
         </div>
-        <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search' ></i>
-        </div>
-        <div class="profile-details">
-            <!--<img src="images/profile.jpg" alt="">-->
-            <span class="admin_name">Sort</span>
-            <i class='bx bx-chevron-down' ></i>
+        <div class="sidebar-button">
+            <i  class='bx bx-user'></i>
+            <span class="dashboard"><%=session.getAttribute("name")%></span>
         </div>
     </nav>
-
-
 
 
     <div class="home-content">
@@ -128,20 +118,28 @@
                 <div class="mb-3 row">
                     <label for="avatar" class="col-sm-3 col-form-label">Avatar</label>
                     <div class="col-sm-9">
-                        <input type="file" class="form-control" id="avatar" name="avatar" value="${updateProduct.avatar}"/>
+                        <input type="file" class="form-control" id="avatar" name="avatar" value="${updateProduct.avatarImage}"/>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label for="otherImages" class="col-sm-3 col-form-label">Other Images</label>
-                    <div class="col-sm-9">
-                        <input type="file" class="form-control" id="otherImages" name="otherImages" value="${updateProduct.otherImages}" multiple/>
-                    </div>
-                </div>
+<%--                <div class="mb-3 row">--%>
+<%--                    <label for="otherImages" class="col-sm-3 col-form-label">Other Images</label>--%>
+<%--                    <div class="col-sm-9">--%>
+<%--                        <input type="file" class="form-control" id="otherImages" name="otherImages" value="${proUpdate.otherImages}" multiple/>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
                 <div class="mb-3 row">
                     <label for="unit" class="col-sm-3 col-form-label" >Unit</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="unit" name="unit" value="${updateProduct.unit}"/>
                     </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="catalogId" class="col-sm-3 col-form-label" >Catalog Name</label>
+                    <select id="catalogId" name="catalog.id" >
+                        <c:forEach items="${listCategories}" var="catalog">
+                            <option value="${catalog.id}">${catalog.name}</option>
+                        </c:forEach>
+                    </select>
                 </div>
 
                 <div class="mb-3 row">

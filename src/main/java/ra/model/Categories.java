@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -26,6 +24,7 @@ public class Categories {
     private String description;
     @Column(name = "catalog_status")
     private boolean status;
-    @OneToMany(mappedBy = "catalog", fetch = FetchType.EAGER)
-    private List<Product> listProduct = new ArrayList<>();
+//    @OneToMany(mappedBy = "catalog", fetch = FetchType.EAGER)
+//    private List<Product> listProduct = new ArrayList<>();
+    // nội dung dâu chị
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,37 +22,37 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="<%=request.getContextPath()%>/dashboardController/findAll" class="active">
+            <a href="<%=request.getContextPath()%>/userController/getData" class="active">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/categoriesController/findAll">
+            <a href="<%=request.getContextPath()%>/categoriesController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-coin-stack'></i>
                 <span class="links_name">Categories</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/productController/findAll">
+            <a href="<%=request.getContextPath()%>/productController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-box'></i>
                 <span class="links_name">Products</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/billController/findAll">
+            <a href="<%=request.getContextPath()%>/billController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-list-ul'></i>
                 <span class="links_name">Bill list</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/userController/findAll">
+            <a href="<%=request.getContextPath()%>/userController/findAll?page=1&sortBy=id&sortDir=ASC">
                 <i  class='bx bx-user'></i>
                 <span class="links_name">User</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="<%=request.getContextPath()%>/views/login.jsp">
                 <i  class='bx bx-log-out'></i>
                 <span class="links_name">Log out</span>
             </a>
@@ -62,7 +63,11 @@
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Categories</span>
+            <span class="dashboard">User</span>
+        </div>
+        <div class="sidebar-button">
+            <i  class='bx bx-user'></i>
+            <span class="dashboard"><%=session.getAttribute("name")%></span>
         </div>
     </nav>
 
@@ -74,17 +79,19 @@
 
             </div>
             <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search' ></i>
+                <form action="<%=request.getContextPath()%>/userController/searchSortUser" method="post">
+                    <input type="text" name="email"  placeholder="Email...">
+                    <button>Search</button>
+                </form>
             </div>
             <div class="sort">
                 <form action="<%=request.getContextPath()%>/userController/findAllSort" method="post" >
-                    <label for="orderDir">Order:</label>
-                    <select id="orderDir" name="orderDir">
-                        <option value="userName">User Name</option>
+                    <label for="sortBy">Order:</label>
+                    <select id="sortBy" name="sortBy">
+                        <option value="name">User Name</option>
                         <option value="created">Created</option>
                     </select>
-                    <select id="orderBy" name="orderBy">
+                    <select id="sortDir" name="sortDir">
                         <option value="ASC">ASC</option>
                         <option value="DESC">DESC</option>
                     </select><br>
@@ -109,24 +116,26 @@
             <c:forEach items="${listUser}" var="user">
                 <tr>
                     <td>${user.id}</td>
-                    <td>${user.userName}</td>
+                    <td>${user.name}</td>
                     <td>${user.email}</td>
                     <td>${user.password}</td>
                     <td>${user.created}</td>
                     <td>${user.status?"Active":"Inactive"}</td>
                     <td>
-                        <a class="btn btn-warning btn-xs" href="<%=request.getContextPath()%>/userController/initUpdate?catalogId=${user.id}">Update</a>
-
+                        <a class="btn btn-warning btn-xs" href="<%=request.getContextPath()%>/userController/updateStatus?userId=${user.id}">Block</a>
                     </td>
                 </tr>
             </c:forEach>
 
             </tbody>
         </table>
-        </table>
-        <c:forEach items="${listPage}" var="page">
-            <a href="/userController/findAll?page=${page}&&sortBy=id&&sortDir=ASC">${page}</a>
-        </c:forEach>
+       <div class="page">
+            <a class="btn btn-warning btn-xs" href="<%=request.getContextPath()%>/userController/findAll?page=1&sortBy=id&sortDir=ASC" >Back</a>
+           <c:forEach items="${listPage}" var="page">
+               <a href="<%=request.getContextPath()%>/userController/findAll?page=${page}&sortBy=id&sortDir=ASC">${page}</a>
+           </c:forEach>
+       </div>
+
     </div>
 </section>
 

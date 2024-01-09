@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: USER
   Date: 2024/01/03
-  Time: 16:39
+  Time: 14:55
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Block User</title>
+    <title>Bill</title>
     <link href="<%=request.getContextPath()%>/resources/css/product.css" rel="stylesheet"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -70,30 +71,42 @@
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Categories</span>
+            <span class="dashboard">Product Images</span>
+        </div>
+        <div class="sidebar-button">
+            <i  class='bx bx-user'></i>
+            <span class="dashboard"><%=session.getAttribute("name")%></span>
         </div>
     </nav>
 
 
+    <div class="home-content">
 
-    <form action="<%=request.getContextPath()%>/categoriesController/update" method="post"  >
-        <div class="modal-body">
-            <div class="mb-3 row">
-                <label for="active" class="col-sm-3 col-form-label">Status</label>
-                <div class="col-sm-9">
-                    <input type="radio" name="status" id="active" value="true" ${userUpdateStatus.status?"checked":""} /><label for="active">Active</label>
-                    <input type="radio" name="status" id="inactive" value="false" ${userUpdateStatus.status?"":"checked"} /><label for="inactive">Inactive</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="btnCreateStudent" >Save</button>
-                <a href=<%=request.getContextPath()%>/userController/findAll"  class="btn btn-secondary" >Cancel</a>
-            </div>
+        <table class="table table-bordered" id="table">
+            <thead>
+            <tr>
+                <th> Id</th>
+                <th>Images</th>
+            </tr>
+            </thead>
+            <tbody id="listStudent">
+            <c:forEach items="${listImages}" var="images">
+                <tr>
+                    <td>${images.id}</td>
+                    <td><img src="${images.imageLink}" alt="${images.id}" height="50" width="50"/></td>
+
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
+
+        <div class="page">
+            <a href="<%=request.getContextPath()%>/productController/findAll?page=1&sortBy=id&sortDir=ASC">Back</a>
         </div>
-    </form>
-
-
+    </div>
 </section>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
@@ -106,4 +119,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></script>
 </body>
 </html>
+
+
+
 

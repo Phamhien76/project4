@@ -7,8 +7,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ra.dto.request.LoginRequest;
 import ra.dto.response.LoginResponse;
-import ra.dto.response.UserResponse;
-import ra.model.Categories;
 import ra.model.User;
 import ra.modelMap.LoginMapper;
 import ra.modelMap.UserMapper;
@@ -34,14 +32,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User findById(int userId) {
+    public User findById(Integer userId) {
         return userRepository.findById(userId).get();
     }
 
     @Override
-    public List<User> findByEmail(String email) {
-
-        return userRepository.findByEmailContains(email);
+    public List<User> findByEmail(String email,int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        return userRepository.findAllByEmailContains(email,pageable).getContent();
     }
 
     @Override
@@ -61,10 +59,17 @@ public class UserServiceImp implements UserService {
 
     @Override
     public boolean block(User user) {
-        User updateUserStatus = userRepository.findById(user.getId()).get();
-        updateUserStatus.setStatus(user.isStatus());
-        User userSta = userRepository.save(updateUserStatus);
-        return userSta != null? true:false;
+        boolean result = false;
+        try {
+            User updateUserStatus = userRepository.findById(user.getId()).get();
+            updateUserStatus.setStatus(!user.isStatus());
+            User userSta = userRepository.save(updateUserStatus);
+            result = true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
+
     }
 
     @Override

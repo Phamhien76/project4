@@ -22,5 +22,5 @@ public class Images {
     private String imageLink;
     @ManyToOne
     @JoinColumn(name = "product_id",referencedColumnName = "product_id")
-    private Product product;
+    private Product productImage;
 }

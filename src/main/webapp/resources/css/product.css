@@ -1,4 +1,6 @@
-
+:root {
+    --color-blue: #156cde
+}
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -73,13 +75,16 @@
     bottom: 0;
     width: 100%;
 }
-.home-section{
+.hom {
     position: relative;
     background: #f5f5f5;
     min-height: 100vh;
     width: calc(100% - 240px);
     left: 240px;
     transition: all 0.5s ease;
+}
+.home-section{
+
 }
 .sidebar.active ~ .home-section{
     width: calc(100% - 60px);
@@ -122,7 +127,8 @@ nav .sidebar-button i{
 
 .table {
     position: absolute;
-    top: 300px;
+    top: 250px;
+
 }
 
     .home-content .bill .home-button {
@@ -150,7 +156,7 @@ nav .sidebar-button i{
     }
 
     .search-box input {
-        height: 100%;
+        height: 60%;
         width: 100%;
         outline: none;
         background: #F5F6FA;
@@ -165,7 +171,7 @@ nav .sidebar-button i{
         height: 40px;
         width: 40px;
         background: #2697FF;
-        right: 5px;
+        /*right: 5px;*/
         top: 50%;
         transform: translateY(-50%);
         border-radius: 4px;
@@ -176,7 +182,11 @@ nav .sidebar-button i{
         transition: all;
     }
 
+ .btn-warning{
+     color: #000;
+     background-color: var(--color-blue);
 
+}
     .nav .sort {
         display: flex;
         align-items: center;
@@ -209,7 +219,17 @@ nav .sidebar-button i{
     }
 }
 
+.page {
+    margin-top: 500px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
 
+.status {
+    padding-top: 500px;
+    background-color: red;
+}
 
 
 .resize-img-home img{

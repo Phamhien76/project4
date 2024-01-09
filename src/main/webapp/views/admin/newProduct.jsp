@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: USER
@@ -29,38 +30,38 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="<%=request.getContextPath()%>/dashboardController/findAll" class="active">
+            <a href="<%=request.getContextPath()%>/userController/getData" class="active">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/categoriesController/findAll">
-                <i class='bx bx-coin-stack'></i>
+            <a href="<%=request.getContextPath()%>/categoriesController/findAll?page=1&sortBy=id&sortDir=ASC">
+                <i  class='bx bx-coin-stack'></i>
                 <span class="links_name">Categories</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/productController/findAll">
-                <i class='bx bx-box'></i>
+            <a href="<%=request.getContextPath()%>/productController/findAll?page=1&sortBy=id&sortDir=ASC">
+                <i  class='bx bx-box'></i>
                 <span class="links_name">Products</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/billController/findAll">
-                <i class='bx bx-list-ul'></i>
+            <a href="<%=request.getContextPath()%>/billController/findAll?page=1&sortBy=id&sortDir=ASC">
+                <i  class='bx bx-list-ul'></i>
                 <span class="links_name">Bill list</span>
             </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/userController/findAll">
-                <i class='bx bx-user'></i>
+            <a href="<%=request.getContextPath()%>/userController/findAll?page=1&sortBy=id&sortDir=ASC">
+                <i  class='bx bx-user'></i>
                 <span class="links_name">User</span>
             </a>
         </li>
         <li>
-            <a href="">
-                <i class='bx bx-log-out'></i>
+            <a href="<%=request.getContextPath()%>/views/login.jsp">
+                <i  class='bx bx-log-out'></i>
                 <span class="links_name">Log out</span>
             </a>
         </li>
@@ -70,14 +71,17 @@
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Categories</span>
+            <span class="dashboard">Product</span>
+        </div>
+        <div class="sidebar-button">
+            <i  class='bx bx-user'></i>
+            <span class="dashboard"><%=session.getAttribute("name")%></span>
         </div>
     </nav>
 
     <div class="home-content">
-        <form action="<%=request.getContextPath()%>/productController/create" method="post"
-              enctype="multipart/form-data" modelMap="newProduct"
-        >
+        <form class="form" action="<%=request.getContextPath()%>/productController/create" method="post"
+              enctype="multipart/form-data" modelMap="newProduct" >
             <div class="modal-body">
                 <div class="mb-3 row">
                     <label for="id" class="col-sm-3 col-form-label" placeholder="Nhập vào mã sản phẩm">Product
@@ -130,6 +134,14 @@
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="unit" name="unit"/>
                     </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="catalogId" class="col-sm-3 col-form-label" >Catalog Name</label>
+                    <select id="catalogId" name="catalog.id" >
+                        <c:forEach items="${listCategories}" var="catalog">
+                            <option value="${catalog.id}">${catalog.name}</option>
+                        </c:forEach>
+                    </select>
                 </div>
 
                 <div class="mb-3 row">

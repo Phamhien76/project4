@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface UserService {
     List<User> findAll();
-    User findById(int userId);
-    List<User> findByEmail(String email);
+    User findById(Integer userId);
+    List<User> findByEmail(String email, int page, int size);
     List<User> findAllSort(String sortDir, String sortBy, int page, int size);
     LoginResponse login(LoginRequest loginRequest);
     boolean block(User user);
