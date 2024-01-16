@@ -75,7 +75,8 @@
     bottom: 0;
     width: 100%;
 }
-.hom {
+
+.home-section{
     position: relative;
     background: #f5f5f5;
     min-height: 100vh;
@@ -83,13 +84,12 @@
     left: 240px;
     transition: all 0.5s ease;
 }
-.home-section{
-
-}
 .sidebar.active ~ .home-section{
     width: calc(100% - 60px);
     left: 60px;
+
 }
+
 .home-section nav{
     display: flex;
     justify-content: space-between;
@@ -108,6 +108,7 @@
 .sidebar.active ~ .home-section nav{
     left: 60px;
     width: calc(100% - 60px);
+
 }
 .home-section nav .sidebar-button{
     display: flex;
@@ -125,11 +126,7 @@ nav .sidebar-button i{
     padding-top: 104px;
 }
 
-.table {
-    position: absolute;
-    top: 250px;
 
-}
 
     .home-content .bill .home-button {
         font-size: 35px;
@@ -217,6 +214,20 @@ nav .sidebar-button i{
         font-size: 25px;
         color: #333;
     }
+}
+
+.table-bordered {
+    position: absolute;
+    top: 250px;
+    width: 100px;
+    height: 100px;
+    background-color: #66b0ff;
+
+
+}
+th{
+    background-color: #3383d9;
+
 }
 
 .page {

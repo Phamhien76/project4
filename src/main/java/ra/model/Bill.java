@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name ="bills")
@@ -33,6 +31,6 @@ public class Bill {
     @Column(name = "bill_status")
     private int status;
 
-    @OneToMany(mappedBy = "bill",fetch = FetchType.EAGER)
-    private List<BillDetail> listBillDetail = new ArrayList<>();
+//    @OneToMany(mappedBy = "bill",fetch = FetchType.EAGER)
+//    private List<BillDetail> listBillDetail = new ArrayList<>();
 }

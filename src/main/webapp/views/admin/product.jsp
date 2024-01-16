@@ -80,8 +80,6 @@
             </div>
         </nav>
 
-
-
         <div class="home-content">
 
             <nav class="nav">
@@ -90,15 +88,8 @@
                 </div>
                 <div class="search-box">
                     <form action="<%=request.getContextPath()%>/productController/searchSortPro" method="get">
-                        <div>
                             <input type="text" name="name" placeholder="Name...">
-                        </div>
-                        <div>
-                            <input type="text" name="name" placeholder="Name...">
-                        </div>
-                        <div>
                             <button>Search</button>
-                        </div>
                     </form>
                 </div>
                 <div class="sort">
@@ -118,7 +109,7 @@
                 </div>
             </nav>
 
-            <table class="table table-bordered" id="table">
+            <table class="table table-bordered"  id="table">
                 <thead>
                 <tr>
                     <th>Product Id</th>
@@ -142,7 +133,7 @@
                         <td>${pro.price}</td>
                         <td>${pro.title}</td>
                         <td>${pro.description}</td>
-                        <td><img src="${pro.avatarImage}" alt="${pro.name}" height="50" width="50"/></td>
+                        <td><img src="${pro.avatarImage}" alt="${pro.name}" height="60" width="60"/></td>
                         <td>
                             <a class="btn btn-warning btn-xs" href="<%=request.getContextPath()%>/productController/findImage?proId=${pro.id}">Xem</a>
                         </td>

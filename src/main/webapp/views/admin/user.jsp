@@ -81,7 +81,7 @@
             <div class="search-box">
                 <form action="<%=request.getContextPath()%>/userController/searchSortUser" method="post">
                     <input type="text" name="email"  placeholder="Email...">
-                    <button>Search</button>
+                    <button >Search</button>
                 </form>
             </div>
             <div class="sort">

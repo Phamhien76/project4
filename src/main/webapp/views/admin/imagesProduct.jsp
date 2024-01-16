@@ -93,7 +93,7 @@
             <c:forEach items="${listImages}" var="images">
                 <tr>
                     <td>${images.id}</td>
-                    <td><img src="${images.imageLink}" alt="${images.id}" height="50" width="50"/></td>
+                    <td><img src="${images.imageLink}" alt="${images.id}" height="100" width="100"/></td>
 
                 </tr>
             </c:forEach>
